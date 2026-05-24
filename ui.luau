@@ -1,8 +1,6 @@
 --!native
 --!optimize 2
 
-local DEBUG_SCARYSYNC = true
-
 -- FABRICATED VALUES!!!
 if not LPH_OBFUSCATED then
 	LPH_JIT = function(...)
@@ -38,10 +36,6 @@ if not LPH_OBFUSCATED then
 	SWG_Note = "scp,alpha"
 	SWG_IsLifetime = true
 end;
-
-
-DEBUG_SCARYSYNC = not not (SWG_Note:lower():find("alpha") or SWG_Note:lower():find("nightly"))
-
 
 if (getgenv and getgenv() or _G).Library then
 	(getgenv and getgenv() or _G).Library.Unload()
@@ -4650,66 +4644,4 @@ local Library, Utility = LPH_JIT(function()
 	return Library, Library.Utility
 end)();
 
-local ui = {
-	window = Library:Window({
-		namestart = "swim",
-		nameend = "hub"
-	})
-}
-
-ui.tabs = {
-	combat = ui.window:Tab({name = "Combat", image = Images.Get("combat")}),
-	visuals = ui.window:Tab({name = "Visuals", image = Images.Get("visuals")}),
-	misc = ui.window:Tab({name = "Misc", image = Images.Get("misc")}),
-	settings = ui.window:Tab({name = "Settings", image = Images.Get("config")})
-}
-ui.subtabs = {
-	combat_aimbot = ui.tabs.combat:SubTab({Name = "Aimbot"}),
-	combat_misc = ui.tabs.combat:SubTab({Name = "Misc"}),
-	visuals_esp = ui.tabs.visuals:SubTab({Name = "Player ESP"}),
-	visuals_esp_misc = ui.tabs.visuals:SubTab({Name = "Misc ESP"}),
-	visuals_lighting = ui.tabs.visuals:SubTab({Name = "Lighting"}),
-	visuals_misc = ui.tabs.visuals:SubTab({Name = "Misc"}),
-	misc_main = ui.tabs.misc:SubTab({Name = "Main"}),
-	misc_antiaim = ui.tabs.misc:SubTab({Name = "Anti-aim"}),
-	misc_exploit = ui.tabs.misc:SubTab({Name = "Exploits"}),
-	settings_main = ui.tabs.settings:SubTab({Name = "Main"}),
-	settings_theme = ui.tabs.settings:SubTab({Name = "Themeing"})
-}
-ui.sections = {
-	aimbot_main = ui.subtabs.combat_aimbot:Section({Name = "Aimbot", Side = "Left"}),
-	aimbot_misc = ui.subtabs.combat_aimbot:Section({Name = "Misc", Side = "Right"}),
-	--aimbot_silent = ui.subtabs.combat_aimbot:Section({Name = "Silent", Side = "Right"}),
-	aimbot_effects = ui.subtabs.combat_misc:Section({Name = "Effects/Logs", Side = "Left"}),
-	gunmods = ui.subtabs.combat_misc:Section({Name = "Gun mods", Side = "Right"}),
-
-	player_esp = ui.subtabs.visuals_esp:Section({Name = "Players", Side = "Left"}),
-	esp_settings = ui.subtabs.visuals_esp:Section({Name = "Settings", Side = "Right"}),
-	item_esp = ui.subtabs.visuals_esp_misc:Section({Name = "Items", Side = "Left"}),
-	other_esp = ui.subtabs.visuals_esp_misc:Section({Name = "Other", Side = "Right"}),
-	world_main_changer = ui.subtabs.visuals_lighting:Section({Name = "Lighting", Side = "Left"}),
-	world_misc_changer = ui.subtabs.visuals_lighting:Section({Name = "Misc", Side = "Right"}),
-	visuals_misc = ui.subtabs.visuals_misc:Section({Name = "View", Side = "Left"}),
-	visuals_local = ui.subtabs.visuals_misc:Section({Name = "Local", Side = "Right"}),
-
-	movement = ui.subtabs.misc_main:Section({Name = "Movement", Side = "Left"}),
-	misc = ui.subtabs.misc_main:Section({Name = "Misc", Side = "Right"}),
-	antiaim = ui.subtabs.misc_antiaim:Section({Name = "Antiaim", Side = "Left"}),
-	antiaim_animations = ui.subtabs.misc_antiaim:Section({Name = "Animation", Side = "Right"}),
-	custom_desync = ui.subtabs.misc_exploit:Section({Name = "Custom desync", Side = "Left"}),
-	exploit = ui.subtabs.misc_exploit:Section({Name = "Exploit", Side = "Right"}),
-
-	settings_config = ui.subtabs.settings_main:Section({Name = "Config", Side = "Left"}),
-	settings_personalization = ui.subtabs.settings_main:Section({Name = "Personalization", Side = "Right"}),
-	theme_config = ui.subtabs.settings_theme:Section({Name = "Config", Side = "Left"}),
-	theme_colors = ui.subtabs.settings_theme:Section({Name = "Colors", Side = "Right"})
-}
-
-do -- grr
-	ui.tabs.combat.Set(true)
-
-	ui.subtabs.combat_aimbot.Set(true)
-	ui.subtabs.visuals_esp.Set(true)
-	ui.subtabs.misc_main.Set(true)
-	ui.subtabs.settings_main.Set(true)
-end
+return Library, Utility, Fonts, Images
